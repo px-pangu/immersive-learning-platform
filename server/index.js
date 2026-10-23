@@ -5,6 +5,11 @@ import cors from 'cors'
 // 注意：llm.js 内部自己先跑 dotenv.config()，必须在任何 process.env 读取之前
 import { callLLM, currentProvider } from './llm.js'
 
+// 业务路由（auth / progress / community）
+import authRouter from './routes/auth.js'
+import progressRouter from './routes/progress.js'
+import communityRouter from './routes/community.js'
+
 const PORT = process.env.PORT || 3001
 const app = express()
 
@@ -15,6 +20,11 @@ app.use((req, _res, next) => { console.log(`[${new Date().toISOString()}] ${req.
 app.get('/api/health', (_req, res) => {
   res.json({ ok: true, provider: currentProvider(), model: process.env.AI_MODEL || 'deepseek-chat' })
 })
+
+// === 业务路由 ===
+app.use('/api/auth', authRouter)
+app.use('/api/progress', progressRouter)
+app.use('/api/community', communityRouter)
 
 // --- AI 路由 ---
 

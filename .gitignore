@@ -11,6 +11,7 @@ coverage
 *.tsbuildinfo
 
 # --- 本地数据（SQLite 等） ---
+server/data/
 server/*.db
 server/*.sqlite
 server/*.sqlite3
