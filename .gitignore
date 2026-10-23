@@ -1,0 +1,17 @@
+node_modules
+dist
+.DS_Store
+*.log
+.env
+.env.local
+
+# --- Vite / 构建缓存 ---
+.vite
+coverage
+*.tsbuildinfo
+
+# --- 本地数据（SQLite 等） ---
+server/*.db
+server/*.sqlite
+server/*.sqlite3
+*.local
