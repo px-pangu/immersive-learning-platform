@@ -71,7 +71,7 @@ export default function Home() {
             </div>
             <div>
               <p className="text-xs text-slate-500">当前经验</p>
-              <p className="font-bold text-slate-800">{currentUser?.exp || 0} EXP</p>
+              <p className="font-bold text-slate-800">{currentUser?.total_xp || 0} EXP</p>
             </div>
           </div>
           <div className="card p-4 flex items-center gap-4">
@@ -89,7 +89,7 @@ export default function Home() {
             </div>
             <div>
               <p className="text-xs text-slate-500">已获成就</p>
-              <p className="font-bold text-slate-800">{currentUser?.achievements.length || 0} 枚</p>
+              <p className="font-bold text-slate-800">{0} 枚</p>
             </div>
           </div>
         </section>

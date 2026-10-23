@@ -24,7 +24,7 @@ const SPECIAL_ITEMS = [
 
 export default function Sidebar() {
   return (
-    <aside className="hidden lg:block fixed top-16 left-0 bottom-0 w-64 bg-white border-r border-slate-100 shadow-sm overflow-y-auto">
+    <aside className="block fixed top-16 left-0 bottom-0 w-64 bg-white border-r border-slate-100 shadow-sm overflow-y-auto">
       <div className="p-4 space-y-1">
         <p className="px-3 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider">
           学习导航

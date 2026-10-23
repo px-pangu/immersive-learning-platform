@@ -15,9 +15,10 @@ export default function Register() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    const ok = await register(username, email, password)
+    const result = await register(username, email, password)
     setLoading(false)
-    if (ok) navigate('/')
+    if (result.ok) navigate('/')
+    else alert('注册失败：' + result.error)
   }
 
   return (
