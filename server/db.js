@@ -5,7 +5,12 @@ import fs from 'fs'
 import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const dataDir = path.join(path.resolve(__dirname, '..'), 'server', 'data')
+// Railway 根目录只读 → 用 /tmp；本地开发用项目内目录
+const dataDir = process.env.DATA_DIR || (
+  process.env.RAILWAY_VOLUME_MOUNT_PATH
+    ? path.join(process.env.RAILWAY_VOLUME_MOUNT_PATH, 'data')
+    : path.join(path.resolve(__dirname, '..'), 'server', 'data')
+)
 if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true })
 
 const db = new Database(path.join(dataDir, 'zhixuetang.db'))

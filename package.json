@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "vite",
     "server": "node server/index.js",
+    "start": "node server/index.js",
     "dev:all": "concurrently -k -n backend,frontend -c blue,magenta \"npm:server\" \"npm:dev\"",
-    "build": "tsc -b && vite build",
+    "build": "npm install && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

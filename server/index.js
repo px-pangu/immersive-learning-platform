@@ -1,5 +1,9 @@
 import express from 'express'
 import cors from 'cors'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // 统一 LLM 调用（支持 deepseek / 其他 OpenAI 兼容 / 本地 mock）
 // 注意：llm.js 内部自己先跑 dotenv.config()，必须在任何 process.env 读取之前
@@ -156,6 +160,23 @@ app.post('/api/ai/npc', async (req, res) => {
 app.use((err, _req, res, _next) => {
   console.error(err)
   res.status(500).json({ error: err.message })
+})
+
+// === 静态前端托管（同域部署）===
+// 生产环境：Express 同时托管 dist/ 静态文件
+const distPath = path.join(__dirname, '..', 'dist')
+try {
+  app.use(express.static(distPath))
+  console.log(`📦 静态前端: ${distPath}`)
+} catch {
+  console.log('📦 静态前端未构建（本地开发由 Vite 托管）')
+}
+// SPA fallback — 所有非 /api 路径返回 index.html
+app.get(/^\/(?!api).*/, (_req, res) => {
+  const indexPath = path.join(__dirname, '..', 'dist', 'index.html')
+  res.sendFile(indexPath, (err) => {
+    if (err) res.status(404).send('请先执行 npm run build 构建前端')
+  })
 })
 
 app.listen(PORT, () => {
